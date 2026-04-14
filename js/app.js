@@ -156,7 +156,10 @@ const OSAApp = {
   _showAppShell() {
     document.getElementById('login-view').classList.remove('active');
     document.getElementById('login-view').style.display = 'none';
-    document.getElementById('app-shell').classList.add('active');
+    
+    const appShell = document.getElementById('app-shell');
+    appShell.classList.add('active');
+    appShell.style.display = 'flex';
   },
 
   // ----------------------------------------------------------
