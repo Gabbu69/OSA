@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="OSA Portal — Official Student Accommodation Management System for institutional housing registration, tenant management, and compliance." />
+  <meta name="theme-color" content="#206223" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>OSA Portal</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "outline-variant": "#bfcaba",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#e1e3e1",
+            "inverse-on-surface": "#eff1ef",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#b14b6f",
+            "surface-container-high": "#e6e9e7",
+            "outline": "#707a6c",
+            "inverse-surface": "#2e3130",
+            "surface-container-low": "#f2f4f2",
+            "surface-dim": "#d8dad9",
+            "primary": "#206223",
+            "surface-container": "#eceeec",
+            "surface": "#f8faf8",
+            "inverse-primary": "#91d78a",
+            "error": "#ba1a1a",
+            "on-primary-container": "#cbffc2",
+            "on-surface-variant": "#40493d",
+            "background": "#f8faf8",
+            "on-background": "#191c1b",
+            "surface-tint": "#2a6b2c",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#acf4a4",
+            "secondary": "#006e1c",
+            "secondary-fixed": "#98f994",
+            "tertiary": "#923357",
+            "primary-container": "#3a7b3a",
+            "surface-container-highest": "#e1e3e1",
+            "on-surface": "#191c1b",
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#91d78a",
+            "on-secondary-container": "#0c7521"
+          },
+          fontFamily: {
+            "headline": ["Manrope", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/app.css" />
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <!-- ======================================================
+       LOGIN VIEW
+       ====================================================== -->
+  <div id="login-view" class="view active" style="display:flex; min-height:100dvh; flex-direction:column;">
+
+    <!-- Header -->
+    <header style="position:fixed; top:0; width:100%; z-index:50; background:rgba(248,250,248,0.85);
+                    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+                    display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:60px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="material-symbols-outlined" style="color:#206223; font-size:24px;">account_balance</span>
+        <h1 style="font-family:'Manrope'; font-weight:800; font-size:1.25rem; color:#206223; letter-spacing:-0.02em; margin:0;">
+          OSA Portal
+        </h1>
+      </div>
+      <nav style="display:none;" class="md:!flex items-center gap-6">
+        <a href="#" style="font-family:'Manrope'; font-weight:600; font-size:0.8125rem; color:#707a6c; text-decoration:none;">Institution</a>
+        <a href="#" style="font-family:'Manrope'; font-weight:600; font-size:0.8125rem; color:#707a6c; text-decoration:none;">Guidelines</a>
+        <a href="#" style="font-family:'Manrope'; font-weight:600; font-size:0.8125rem; color:#707a6c; text-decoration:none;">Support</a>
+      </nav>
+    </header>
+
+    <!-- Main Login Content -->
+    <main style="flex:1; display:flex; align-items:center; justify-content:center; padding:76px 16px 32px; position:relative; overflow:hidden;">
+      <!-- Background Blobs -->
+      <div style="position:absolute; inset:0; pointer-events:none; opacity:0.15;">
+        <div style="position:absolute; top:-96px; right:-96px; width:384px; height:384px; background:#acf4a4; border-radius:50%; filter:blur(80px);"></div>
+        <div style="position:absolute; bottom:25%; left:-96px; width:320px; height:320px; background:#98f994; border-radius:50%; filter:blur(80px);"></div>
+      </div>
+
+      <div style="width:100%; max-width:960px; display:grid; grid-template-columns:1fr; border-radius:20px; overflow:hidden;
+                  background:#ffffff; box-shadow:0 12px 32px rgba(25,28,27,0.06); position:relative; z-index:1;"
+           class="lg:!grid-cols-2">
+
+        <!-- Left Hero (desktop only) -->
+        <div style="display:none; position:relative; overflow:hidden; background:#206223;" class="lg:!block">
+          <img style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; mix-blend-mode:overlay; opacity:0.5;"
+               src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=1000&fit=crop&q=80"
+               alt="University campus" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to bottom right, rgba(32,98,35,0.85), rgba(58,123,58,0.92));
+                      padding:48px; display:flex; flex-direction:column; justify-content:flex-end; color:white;">
+            <span style="font-size:0.625rem; text-transform:uppercase; letter-spacing:0.15em; font-weight:600; opacity:0.8; margin-bottom:16px;">
+              Academic Sanctuary
+            </span>
+            <h2 style="font-family:'Manrope'; font-weight:800; font-size:2rem; line-height:1.15; margin:0 0 16px;">
+              Securing the future of campus living.
+            </h2>
+            <p style="font-size:1rem; opacity:0.88; font-weight:300; line-height:1.6; max-width:400px; margin:0;">
+              The Official Student Accommodation Portal: Streamlining housing registration, management, and institutional policy compliance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Login Form -->
+        <div style="padding:32px 24px;" class="md:!p-12 lg:!p-16" >
+          <div style="margin-bottom:40px; text-align:center;" class="lg:!text-left">
+            <div style="margin-bottom:24px;" class="lg:!hidden" >
+              <span class="material-symbols-outlined" style="font-size:48px; color:#206223;">account_balance</span>
+            </div>
+            <h2 style="font-family:'Manrope'; font-weight:800; font-size:1.75rem; color:#191c1b; letter-spacing:-0.02em; margin:0 0 8px;">
+              Welcome Back
+            </h2>
+            <p style="color:#707a6c; font-size:0.9375rem; margin:0;">Sign in to your OSA account to manage your residency.</p>
+          </div>
+
+          <form onsubmit="event.preventDefault(); OSAApp.login();" style="display:flex; flex-direction:column; gap:20px;">
+            <!-- Error Message -->
+            <div id="login-error" style="display:none; align-items:center; gap:10px; padding:14px 16px;
+                        background:rgba(186,26,26,0.08); border-radius:12px; color:#ba1a1a;
+                        font-size:0.8125rem; font-weight:500;">
+              <span class="material-symbols-outlined" style="font-size:18px; flex-shrink:0;">error</span>
+              <span id="login-error-text"></span>
+            </div>
+            <div>
+              <label for="identity" style="display:block; font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em;
+                                           font-weight:700; color:#707a6c; margin:0 0 8px 4px;">
+                Student ID / Email
+              </label>
+              <div style="position:relative;">
+                <div style="position:absolute; top:0; bottom:0; left:0; padding-left:16px; display:flex; align-items:center; pointer-events:none;">
+                  <span class="material-symbols-outlined" style="font-size:18px; color:#bfcaba;">person</span>
+                </div>
+                <input id="identity" name="identity" type="text" placeholder="e.g. 2024-00123-ST-0"
+                       style="width:100%; padding:14px 16px 14px 48px; background:#f2f4f2; border:2px solid transparent;
+                              border-radius:16px; font-family:'Inter'; font-size:0.875rem; color:#191c1b; outline:none;
+                              transition:all 0.2s ease;"
+                       onfocus="this.style.borderColor='#206223'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(32,98,35,0.08)';"
+                       onblur="this.style.borderColor='transparent'; this.style.background='#f2f4f2'; this.style.boxShadow='none';" />
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin:0 0 8px 4px;">
+                <label for="password" style="font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color:#707a6c;">
+                  Password
+                </label>
+                <a href="#" style="font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color:#206223; text-decoration:none;">
+                  Forgot Password?
+                </a>
+              </div>
+              <div style="position:relative;">
+                <div style="position:absolute; top:0; bottom:0; left:0; padding-left:16px; display:flex; align-items:center; pointer-events:none;">
+                  <span class="material-symbols-outlined" style="font-size:18px; color:#bfcaba;">lock</span>
+                </div>
+                <input id="password" name="password" type="password" placeholder="••••••••••••"
+                       style="width:100%; padding:14px 16px 14px 48px; background:#f2f4f2; border:2px solid transparent;
+                              border-radius:16px; font-family:'Inter'; font-size:0.875rem; color:#191c1b; outline:none;
+                              transition:all 0.2s ease;"
+                       onfocus="this.style.borderColor='#206223'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(32,98,35,0.08)';"
+                       onblur="this.style.borderColor='transparent'; this.style.background='#f2f4f2'; this.style.boxShadow='none';" />
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+              <input id="remember-me" name="remember-me" type="checkbox"
+                     style="width:16px; height:16px; border-radius:4px; accent-color:#206223;" />
+              <label for="remember-me" style="font-size:0.8125rem; color:#707a6c; font-weight:500;">
+                Keep me signed in for 30 days
+              </label>
+            </div>
+
+            <button id="login-btn" type="submit"
+                    style="width:100%; padding:16px; background:linear-gradient(135deg, #206223, #3a7b3a); color:white;
+                           font-family:'Manrope'; font-weight:700; font-size:0.9375rem; border-radius:999px; border:none;
+                           cursor:pointer; box-shadow:0 6px 20px rgba(32,98,35,0.3); display:flex; align-items:center;
+                           justify-content:center; gap:8px; transition:all 0.2s ease;"
+                    onmousedown="this.style.transform='scale(0.98)'"
+                    onmouseup="this.style.transform=''"
+                    onmouseleave="this.style.transform=''">
+              <span id="login-text" style="display:flex; align-items:center; gap:8px;">
+                Sign In
+                <span class="material-symbols-outlined" style="font-size:20px;">login</span>
+              </span>
+              <div id="login-loader" class="login-loader"></div>
+            </button>
+          </form>
+
+          <div style="margin-top:40px; text-align:center;">
+            <div style="position:relative; padding:16px 0;">
+              <div style="position:absolute; inset:0; display:flex; align-items:center;">
+                <div style="width:100%; border-top:1px solid rgba(191,202,186,0.2);"></div>
+              </div>
+              <div style="position:relative; display:flex; justify-content:center;">
+                <span style="padding:0 16px; background:#ffffff; font-size:0.5625rem; text-transform:uppercase;
+                             letter-spacing:0.1em; font-weight:600; color:#bfcaba;">
+                  Institutional Access
+                </span>
+              </div>
+            </div>
+            <p style="font-size:0.8125rem; color:#707a6c;">
+              Don't have an account yet?
+              <a href="#" style="color:#206223; font-weight:700; text-decoration:none; margin-left:4px;">Register as a New Student</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="width:100%; padding:24px 0; border-top:1px solid rgba(191,202,186,0.15); background:#f8faf8;">
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:0 40px;
+                  max-width:1120px; margin:0 auto; gap:16px;" class="md:!flex-row">
+        <span style="font-family:'Inter'; font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:#bfcaba;">
+          © 2024 OSA Portal. All institutional rights reserved.
+        </span>
+        <div style="display:flex; gap:32px;">
+          <a href="#" style="font-family:'Inter'; font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:#bfcaba; text-decoration:none;">Privacy Policy</a>
+          <a href="#" style="font-family:'Inter'; font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:#bfcaba; text-decoration:none;">Terms of Service</a>
+          <a href="#" style="font-family:'Inter'; font-size:0.5625rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:#bfcaba; text-decoration:none;">Security Standards</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================================================
+       APP SHELL (shown after login)
+       ====================================================== -->
+  <div id="app-shell" style="display:none; flex-direction:column; min-height:100dvh;">
+
+    <!-- App Header -->
+    <header class="app-header" style="display:flex; align-items:center; justify-content:space-between; padding:0 20px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="material-symbols-outlined" style="color:#206223; font-size:22px;">account_balance</span>
+        <h1 style="font-family:'Manrope'; font-weight:800; font-size:1.125rem; color:#206223; letter-spacing:-0.02em; margin:0;">
+          OSA Portal
+        </h1>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px;">
+        <button class="btn-icon" onclick="OSAApp.showToast('No new notifications')" aria-label="Notifications">
+          <span class="material-symbols-outlined" style="font-size:22px; color:#40493d;">notifications</span>
+        </button>
+        <button class="btn-icon" onclick="OSAApp.logout()" aria-label="Logout">
+          <span class="material-symbols-outlined" style="font-size:22px; color:#40493d;">logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="app-content"
+          style="transition: opacity 0.35s ease, transform 0.35s ease;">
+      <!-- Views render here dynamically -->
+    </main>
+
+    <!-- FAB Button -->
+    <button id="fab-btn" class="fab" style="display:none;" onclick="OSAApp.showToast('Feature coming soon')" aria-label="Add">
+      <span class="material-symbols-outlined" style="font-size:26px;">add</span>
+    </button>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+      <div id="nav-dashboard" class="nav-item active" onclick="OSAApp.navigateTo('dashboard')" role="button" tabindex="0">
+        <div class="nav-icon-wrap">
+          <span class="material-symbols-outlined nav-icon">dashboard</span>
+        </div>
+        <span class="nav-label">Home</span>
+      </div>
+      <div id="nav-students" class="nav-item" onclick="OSAApp.navigateTo('students')" role="button" tabindex="0">
+        <div class="nav-icon-wrap">
+          <span class="material-symbols-outlined nav-icon">groups</span>
+        </div>
+        <span class="nav-label">Students</span>
+      </div>
+      <div id="nav-concerns" class="nav-item" onclick="OSAApp.navigateTo('concerns')" role="button" tabindex="0">
+        <div class="nav-icon-wrap">
+          <span class="material-symbols-outlined nav-icon">report</span>
+        </div>
+        <span class="nav-label">Concerns</span>
+      </div>
+      <div id="nav-calendar" class="nav-item" onclick="OSAApp.navigateTo('calendar')" role="button" tabindex="0">
+        <div class="nav-icon-wrap">
+          <span class="material-symbols-outlined nav-icon">calendar_month</span>
+        </div>
+        <span class="nav-label">Schedule</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

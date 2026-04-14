@@ -1,0 +1,949 @@
+/* ============================================================
+   OSA Portal — Custom Styles
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. Base & Reset
+   ---------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(191, 202, 186, 0.4);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(191, 202, 186, 0.7);
+}
+
+/* ----------------------------------------------------------
+   2. View System
+   ---------------------------------------------------------- */
+.view {
+  display: none;
+  animation: viewFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes viewFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); }
+}
+
+/* ----------------------------------------------------------
+   3. Login View
+   ---------------------------------------------------------- */
+#login-view {
+  min-height: 100dvh;
+}
+
+.login-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+}
+
+/* ----------------------------------------------------------
+   4. App Shell
+   ---------------------------------------------------------- */
+#app-shell {
+  display: none;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+#app-shell.active {
+  display: flex;
+}
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 60px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(248, 250, 248, 0.85);
+  border-bottom: 1px solid rgba(191, 202, 186, 0.15);
+}
+
+.app-content {
+  flex: 1;
+  padding-top: 60px;
+  padding-bottom: 88px;
+  overflow-y: auto;
+  background: #f8faf8;
+}
+
+/* ----------------------------------------------------------
+   5. Bottom Navigation
+   ---------------------------------------------------------- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 80px;
+  padding: 8px 16px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(191, 202, 186, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px 16px;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nav-item .nav-icon-wrap {
+  width: 44px;
+  height: 36px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+}
+
+.nav-item .nav-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #707a6c;
+  transition: color 0.3s ease;
+}
+
+.nav-item .nav-icon {
+  font-size: 22px;
+  color: #707a6c;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-item.active .nav-icon-wrap {
+  background: #acf4a4;
+}
+
+.nav-item.active .nav-icon {
+  color: #206223;
+  font-variation-settings: 'FILL' 1;
+}
+
+.nav-item.active .nav-label {
+  color: #206223;
+}
+
+.nav-item:active {
+  transform: scale(0.92);
+}
+
+/* ----------------------------------------------------------
+   6. Cards
+   ---------------------------------------------------------- */
+.osa-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(25, 28, 27, 0.06);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.osa-card:active {
+  transform: scale(0.98);
+}
+
+.boarding-card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.boarding-card-image-fallback {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boarding-card-image-fallback .material-symbols-outlined {
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ----------------------------------------------------------
+   7. Stats Badge
+   ---------------------------------------------------------- */
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.stat-badge-primary {
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(32, 98, 35, 0.3);
+}
+
+.stat-badge-secondary {
+  background: #acf4a4;
+  color: #206223;
+}
+
+/* ----------------------------------------------------------
+   8. Status Indicators
+   ---------------------------------------------------------- */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.resolved,
+.status-dot.low {
+  background: #206223;
+  box-shadow: 0 0 8px rgba(32, 98, 35, 0.4);
+}
+
+.status-dot.pending,
+.status-dot.medium {
+  background: #C59A1A;
+  box-shadow: 0 0 8px rgba(197, 154, 26, 0.4);
+}
+
+.status-dot.investigating,
+.status-dot.high,
+.status-dot.urgent {
+  background: #ba1a1a;
+  box-shadow: 0 0 8px rgba(186, 26, 26, 0.4);
+}
+
+.status-bar {
+  width: 5px;
+  border-radius: 999px;
+  min-height: 40px;
+  flex-shrink: 0;
+}
+
+.status-bar.low { background: #206223; }
+.status-bar.medium { background: #C59A1A; }
+.status-bar.high { background: #ba1a1a; }
+
+/* Priority chip */
+.priority-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.priority-chip.low {
+  background: rgba(172, 244, 164, 0.3);
+  color: #206223;
+}
+.priority-chip.medium {
+  background: rgba(197, 154, 26, 0.15);
+  color: #8B6914;
+}
+.priority-chip.high {
+  background: rgba(186, 26, 26, 0.1);
+  color: #ba1a1a;
+}
+
+/* Status chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-chip.paid {
+  background: rgba(172, 244, 164, 0.3);
+  color: #206223;
+}
+.status-chip.overdue {
+  background: rgba(186, 26, 26, 0.1);
+  color: #ba1a1a;
+}
+
+/* ----------------------------------------------------------
+   9. Calendar
+   ---------------------------------------------------------- */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #707a6c;
+  padding: 8px 0;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #191c1b;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.calendar-day:hover {
+  background: #f2f4f2;
+}
+
+.calendar-day.today {
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  color: white;
+  font-weight: 700;
+}
+
+.calendar-day.has-event::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #206223;
+  position: absolute;
+  bottom: 6px;
+}
+
+.calendar-day.today.has-event::after {
+  background: #acf4a4;
+}
+
+.calendar-day.other-month {
+  color: #bfcaba;
+}
+
+/* ----------------------------------------------------------
+   10. Glass Effects
+   ---------------------------------------------------------- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(25, 28, 27, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: overlayFadeIn 0.3s ease forwards;
+}
+
+.glass-modal {
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ----------------------------------------------------------
+   11. Occupancy Bar
+   ---------------------------------------------------------- */
+.occupancy-bar {
+  width: 100%;
+  height: 6px;
+  background: #f2f4f2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.occupancy-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #206223, #3a7b3a);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ----------------------------------------------------------
+   12. Search Bar
+   ---------------------------------------------------------- */
+.search-container {
+  position: relative;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #707a6c;
+  font-size: 20px;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: #f2f4f2;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #191c1b;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-container input::placeholder {
+  color: #707a6c;
+}
+
+.search-container input:focus {
+  border-color: #206223;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(32, 98, 35, 0.08);
+}
+
+.search-container input:focus + .search-icon,
+.search-container input:focus ~ .search-icon {
+  color: #206223;
+}
+
+/* ----------------------------------------------------------
+   13. Buttons
+   ---------------------------------------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(32, 98, 35, 0.25);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #e6e9e7;
+  color: #191c1b;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #d8dad9;
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #191c1b;
+}
+
+.btn-icon:hover {
+  background: #f2f4f2;
+}
+
+.btn-icon:active {
+  transform: scale(0.9);
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(32, 98, 35, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
+}
+
+.fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 28px rgba(32, 98, 35, 0.45);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* ----------------------------------------------------------
+   14. Avatar
+   ---------------------------------------------------------- */
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.avatar-sm {
+  width: 36px;
+  height: 36px;
+  font-size: 0.8125rem;
+}
+
+.avatar-lg {
+  width: 72px;
+  height: 72px;
+  font-size: 1.5rem;
+}
+
+.avatar-xl {
+  width: 96px;
+  height: 96px;
+  font-size: 2rem;
+}
+
+/* ----------------------------------------------------------
+   15. Loading Animation
+   ---------------------------------------------------------- */
+.login-loader {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.login-loader.active {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #f2f4f2 25%, #e6e9e7 50%, #f2f4f2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ----------------------------------------------------------
+   16. Concern Category Card
+   ---------------------------------------------------------- */
+.concern-category-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(25, 28, 27, 0.06);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.concern-category-card:active {
+  transform: scale(0.98);
+}
+
+/* ----------------------------------------------------------
+   17. Filter Tabs
+   ---------------------------------------------------------- */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  background: #f2f4f2;
+  color: #707a6c;
+  font-family: 'Inter', sans-serif;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #206223, #3a7b3a);
+  color: #ffffff;
+}
+
+.filter-tab:active {
+  transform: scale(0.95);
+}
+
+/* ----------------------------------------------------------
+   18. Student Detail Info Row
+   ---------------------------------------------------------- */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.info-row + .info-row {
+  border-top: 1px solid rgba(191, 202, 186, 0.15);
+}
+
+.info-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(172, 244, 164, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon .material-symbols-outlined {
+  font-size: 18px;
+  color: #206223;
+}
+
+/* ----------------------------------------------------------
+   19. Event List Item
+   ---------------------------------------------------------- */
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.event-item:active {
+  transform: scale(0.98);
+}
+
+.event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.event-dot.billing { background: #C59A1A; }
+.event-dot.inspection { background: #206223; }
+.event-dot.contract { background: #206223; }
+.event-dot.meeting { background: #006e1c; }
+.event-dot.security { background: #ba1a1a; }
+.event-dot.maintenance { background: #707a6c; }
+.event-dot.safety { background: #ba1a1a; }
+.event-dot.announcement { background: #923357; }
+
+/* ----------------------------------------------------------
+   20. Responsive & Desktop
+   ---------------------------------------------------------- */
+@media (min-width: 768px) {
+  .app-content {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .bottom-nav {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 24px 24px 0 0;
+  }
+
+  .app-header {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .fab {
+    right: calc(50% - 220px);
+  }
+}
+
+/* ----------------------------------------------------------
+   21. Back Button Header
+   ---------------------------------------------------------- */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+/* ----------------------------------------------------------
+   22. Amenity Chip
+   ---------------------------------------------------------- */
+.amenity-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: rgba(172, 244, 164, 0.18);
+  color: #206223;
+}
+
+/* ----------------------------------------------------------
+   23. Concern Action Buttons
+   ---------------------------------------------------------- */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.action-btn.approve {
+  background: rgba(172, 244, 164, 0.25);
+  color: #206223;
+}
+
+.action-btn.reject {
+  background: rgba(186, 26, 26, 0.1);
+  color: #ba1a1a;
+}
+
+.action-btn.investigate {
+  background: rgba(197, 154, 26, 0.12);
+  color: #8B6914;
+}
+
+/* ----------------------------------------------------------
+   24. Toast Notification
+   ---------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 14px 24px;
+  background: #191c1b;
+  color: #ffffff;
+  border-radius: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  z-index: 200;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(25, 28, 27, 0.2);
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ----------------------------------------------------------
+   25. Empty State
+   ---------------------------------------------------------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty-state .material-symbols-outlined {
+  font-size: 56px;
+  color: #bfcaba;
+  margin-bottom: 16px;
+}
